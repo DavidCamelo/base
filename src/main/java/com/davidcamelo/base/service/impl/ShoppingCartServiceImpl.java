@@ -59,9 +59,6 @@ public class ShoppingCartServiceImpl extends BaseServiceImpl<ShoppingCart, Shopp
     public ShoppingCartDTO removeProduct(String uuid, ProductDTO productDTO) {
         ShoppingCart shoppingCart = getByUUID(uuid);
         Product product = productService.getByUUID(productDTO.getUuid());
-        if (shoppingCart.getProducts() == null) {
-            shoppingCart.setProducts(new HashSet<>());
-        }
         if (shoppingCart.getProducts().contains(product)) {
             Optional<ShoppingCartProduct> oShoppingCartProduct = getShoppingCartProductId(shoppingCart.getUuid(), product.getUuid());
             oShoppingCartProduct.ifPresent(shoppingCartProduct -> {
